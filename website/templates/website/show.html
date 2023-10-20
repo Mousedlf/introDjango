@@ -1,0 +1,14 @@
+{% extends 'website/base.html' %}
+
+{% block content %}
+
+
+    <p><strong>{{message.title}}</strong></p>
+    <p>{{message.content}}</p>
+    <hr>
+
+
+<a href="{% url 'index_home' %}">home</a>
+
+
+{% endblock %}
