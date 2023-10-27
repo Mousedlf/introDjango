@@ -8,9 +8,30 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                  <li class="nav-item">
+            <a href="{% url 'index_messages' %}" class="btn">Messages</a>
+          </li>
+    {% if request.user.is_authenticated %}
           <li class="nav-item">
-            <a href="{% url 'index_messages' %}">Messages</a>
-        </li>
+            <a href="{% url 'logout_user' %}" class="btn">Logout</a>
+            </li>
+        <li class="nav-item">
+            <a href="{% url 'create_message' %}" class="btn">Add a message</a>
+            </li>
+        <p><strong>{{ request.user }}</strong></p>
+
+        {% else %}
+
+          <li class="nav-item">
+            <a href="{% url 'register_user' %}" class="btn">Register</a>
+            </li>
+                <li class="nav-item">
+            <a href="{% url 'login_user' %}" class="btn">Login</a>
+            </li>
+          </li>
+
+          {% endif %}
       </ul>
     </div>
   </div>

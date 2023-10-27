@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'bootstrap5',
     'crispy_forms',
     "crispy_bootstrap5",
+    'rest_framework'
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -107,6 +108,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+AUTH_USER_MODEL = 'website.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

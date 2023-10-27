@@ -2,18 +2,21 @@
 
 {% block content %}
 
-    <a href="{% url 'create_message' %}" class="btn btn-secondary">create</a>
-
 
 
 
 {% for message in messages %}
 
-    <p><strong>{{message.title}}</strong></p>
+    <p>written by: {{ message.author.username }}</p>
+        <p>category: {{ message.category.name }}</p>
+<p><strong>{{message.title}}</strong></p>
     <p>{{message.content}}</p>
     <a href="{% url 'show_message' message.id %}" class="btn btn-primary">plus</a>
-    <a href="{% url 'delete_message' message.id %}" class="btn btn-danger">delete</a>
-    <a href="{% url 'edit_message' message.id %}" class="btn btn-warning">edit</a>
+
+    {% if request.user == message.author %}
+        <a href="{% url 'delete_message' message.id %}" class="btn btn-danger">delete</a>
+        <a href="{% url 'edit_message' message.id %}" class="btn btn-warning">edit</a>
+    {% endif %}
 
     <hr>
 

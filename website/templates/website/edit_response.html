@@ -1,0 +1,13 @@
+{% extends 'website/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<form method="post" class="form">
+    {% csrf_token %}
+    {{ responseForm|crispy }}
+    <button type="submit" class="btn btn-primary">VALIDER</button>
+</form>
+
+
+{% endblock %}

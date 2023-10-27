@@ -1,14 +1,31 @@
 {% extends 'website/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 
 
-    <p><strong>{{message.title}}</strong></p>
+    <h1><strong>{{message.title}}</strong></h1>
     <p>{{message.content}}</p>
-    <hr>
 
 
-<a href="{% url 'index_home' %}">home</a>
+<h2>Responses</h2>
 
+{% for response in message.response_set.all  %}
+    <div class="card">
+        <div class=" d-flex justify-content-between">
+    <p>{{ response.author }}: {{ response.content }}</p>
+        <div class="">
+            <a href="{% url 'delete_response' response.id %}" class="btn btn-danger">delete</a>
+            <a href="{% url 'edit_response' response.id %}" class="btn btn-warning">edit</a>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+    <form action="{% url 'add_response' message.id %}" method="post" class="form">
+        {% csrf_token %}
+        {{  responseForm|crispy }}
+        <button type="submit" class="btn btn-success">send</button>
+    </form>
 
 {% endblock %}
