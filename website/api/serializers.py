@@ -5,14 +5,14 @@ from website.models import Message, Response, Category, User
 class AuthorSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "username"]
+        fields = ["username"]
 
 
 class ResponseSerializer(ModelSerializer):
-    author = AuthorSerializer()
     class Meta:
         model = Response
         fields = ["id", "content", "author"]
+    author = AuthorSerializer()
 
 
 class CategorySerializer(ModelSerializer):
@@ -22,12 +22,12 @@ class CategorySerializer(ModelSerializer):
 
 
 class MessageSerializer(ModelSerializer):
-    category = CategorySerializer()
-    responses = ResponseSerializer(many=True)
-    author = AuthorSerializer()
     class Meta:
         model = Message
         fields = '__all__'
+    category_ = CategorySerializer(source='category', read_only=True)
+    responses = ResponseSerializer(many=True, required=False)
+    author = AuthorSerializer(required=False)
 
 
 
